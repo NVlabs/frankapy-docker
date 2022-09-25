@@ -1,0 +1,4 @@
+[submodule "franka-interface"]
+	path = franka-interface
+	url = ssh://git@gitlab-master.nvidia.com:12051/ychao/franka-interface.git
+	branch = srl
