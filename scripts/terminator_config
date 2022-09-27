@@ -1,0 +1,59 @@
+[global_config]
+[keybindings]
+[layouts]
+  [[default]]
+    [[[child1]]]
+      parent = window0
+      type = Terminal
+    [[[window0]]]
+      parent = ""
+      type = Window
+  [[start_frankapy_pc]]
+    [[[child0]]]
+      order = 0
+      parent = ""
+      type = Window
+    [[[child1]]]
+      order = 0
+      parent = child0
+      type = HPaned
+    [[[terminal2]]]
+      command = roscore; bash
+      order = 0
+      parent = child1
+      type = Terminal
+    [[[terminal3]]]
+      order = 1
+      parent = child1
+      type = Terminal
+  [[start_control_pc]]
+    [[[child0]]]
+      order = 0
+      parent = ""
+      type = Window
+    [[[child1]]]
+      order = 0
+      parent = child0
+      type = HPaned
+    [[[child3]]]
+      order = 1
+      parent = child1
+      type = VPaned
+    [[[terminal2]]]
+      command = $HOME/frankapy-docker/scripts/start_franka_interface.sh; bash
+      order = 0
+      parent = child1
+      type = Terminal
+    [[[terminal4]]]
+      command = sleep 2; $HOME/frankapy-docker/scripts/start_franka_ros_interface.sh; bash
+      order = 0
+      parent = child3
+      type = Terminal
+    [[[terminal5]]]
+      command = sleep 2; $HOME/frankapy-docker/scripts/start_franka_gripper.sh; bash
+      order = 1
+      parent = child3
+      type = Terminal
+[plugins]
+[profiles]
+  [[default]]
