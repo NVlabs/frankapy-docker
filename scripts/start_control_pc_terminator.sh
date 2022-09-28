@@ -1,6 +1,6 @@
 #!/bin/bash
 
-mkdir $HOME/.config/terminator
+mkdir -p $HOME/.config/terminator
 
 rsync $HOME/frankapy-docker/scripts/terminator_config $HOME/.config/terminator/config
 
