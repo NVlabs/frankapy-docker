@@ -26,7 +26,8 @@ RUN apt-get install -y python3-pip
 RUN apt-get install -y git && \
     pip install -U \
         numpy \
-        Pillow && \
+        Pillow \
+        protobuf && \
     git clone --recurse-submodules https://github.com/iamlab-cmu/frankapy.git && \
     cd frankapy && \
     pip install -e . && \
