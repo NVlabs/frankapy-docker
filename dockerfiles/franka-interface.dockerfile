@@ -24,7 +24,11 @@ RUN apt-get install -y \
         git \
         wget && \
     cd franka-interface && \
-    bash ./bash_scripts/clone_libfranka.sh 3 && \
+    git clone https://github.com/frankaemika/libfranka.git && \
+    cd libfranka && \
+    git checkout f3b8d77 && \
+    git submodule update --init --recursive && \
+    cd .. && \
     bash ./bash_scripts/make_libfranka.sh && \
     bash ./bash_scripts/make_franka_interface.sh && \
     sh \
