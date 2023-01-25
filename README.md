@@ -212,7 +212,6 @@ See the official docs [here](https://docs.docker.com/engine/install/ubuntu/) and
     sudo systemctl restart docker
 
     # Test run a base CUDA container.
-    docker run --gpus all nvidia/cuda:11.0-base nvidia-smi
     docker run --rm --gpus all nvidia/cuda:11.0.3-base-ubuntu20.04 nvidia-smi
     docker image rm nvidia/cuda:11.0.3-base-ubuntu20.04 -f
     ```
