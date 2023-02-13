@@ -75,5 +75,5 @@ RUN apt-get install -y rsync
 
 # Install terminator.
 RUN apt-get install -y \
-    libcanberra-gtk3-module \
-    terminator
+        libcanberra-gtk3-module \
+        terminator
