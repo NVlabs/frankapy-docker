@@ -1,8 +1,5 @@
 #!/bin/bash
 
-set -e
-set -u
-
 if [ -z ${FRANKAPY_DIR+x} ]; then
   opts=""
 else
@@ -11,7 +8,7 @@ fi
 
 FRANKAPY_DOCKER_DIR=$( cd $( dirname ${BASH_SOURCE[0]} )/../ && pwd )
 
-xhost >& /dev/null && xhost +
+xhost +local:root
 docker run \
   -it \
   -e DISPLAY \
@@ -22,4 +19,4 @@ docker run \
   $opts \
   frankapy \
   /bin/bash
-xhost >& /dev/null && xhost -
+xhost -local:root
