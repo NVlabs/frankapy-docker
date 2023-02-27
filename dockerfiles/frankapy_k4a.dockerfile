@@ -59,7 +59,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y \
 # Install Azure_Kinect_ROS_Driver.
 RUN apt-get install -y git && \
     cd $HOME/catkin_ws/src && \
-    git clone https://github.com/microsoft/Azure_Kinect_ROS_Driver
+    git clone https://github.com/microsoft/Azure_Kinect_ROS_Driver.git
 
 # Build catkin workspace.
 RUN cd catkin_ws && \
