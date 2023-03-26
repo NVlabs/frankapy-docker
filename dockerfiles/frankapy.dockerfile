@@ -19,8 +19,10 @@ RUN apt-get install -y \
 # Create catkin workspace.
 RUN mkdir -p catkin_ws/src
 
-# Install pip.
-RUN apt-get install -y python3-pip
+# Install Python3 and pip.
+RUN apt-get install -y \
+        python3 \
+        python3-pip
 
 # Install frankapy.
 RUN apt-get install -y git && \
