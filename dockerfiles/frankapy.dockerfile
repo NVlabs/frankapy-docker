@@ -19,7 +19,7 @@ RUN apt-get install -y \
 # Create catkin workspace.
 RUN mkdir -p catkin_ws/src
 
-# Install Python3 and pip.
+# Install Python 3 and pip.
 RUN apt-get install -y \
         python3 \
         python3-pip
