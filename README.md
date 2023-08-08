@@ -145,16 +145,18 @@ Install and set up `docker`:
 # Set up the repository.
 sudo apt-get update
 sudo apt-get install \
-   curl
-sudo mkdir -p /etc/apt/keyrings
+  curl
+sudo install -m 0755 -d /etc/apt/keyrings
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
 echo \
-  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
-  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+  "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
 # Install Docker Engine.
 sudo apt-get update
-sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
 # Verify that Docker Engine is installed correctly by running the hello-world image.
 sudo docker run hello-world
@@ -205,15 +207,18 @@ See the official docs [here](https://docs.docker.com/engine/install/ubuntu/) and
                 sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' | \
                 sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
 
-    # Install the nvidia-docker2 package and dependencies.
-    sudo apt-get update && sudo apt-get install -y nvidia-docker2
+    # Install the nvidia-container-toolkit package and dependencies.
+    sudo apt-get update && sudo apt-get install -y nvidia-container-toolkit
+
+    # Configure the Docker daemon to recognize the NVIDIA Container Runtime.
+    sudo nvidia-ctk runtime configure --runtime=docker
 
     # Restart the Docker daemon to complete the installation.
     sudo systemctl restart docker
 
     # Test run a base CUDA container.
-    docker run --rm --gpus all nvidia/cuda:11.0.3-base-ubuntu20.04 nvidia-smi
-    docker image rm nvidia/cuda:11.0.3-base-ubuntu20.04 -f
+    docker run --rm --runtime=nvidia --gpus all nvidia/cuda:11.6.2-base-ubuntu20.04 nvidia-smi
+    docker image rm nvidia/cuda:11.6.2-base-ubuntu20.04 -f
     ```
 
     See the official docs [here](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#installing-on-ubuntu-and-debian) for more information.
