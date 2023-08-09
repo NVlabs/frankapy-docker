@@ -1,3 +1,7 @@
+# Copyright (c) 2022-2023 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+#
+# Licensed under the MIT License [see LICENSE for details].
+
 FROM nvidia/cudagl:11.4.2-devel-ubuntu20.04
 
 # Update apt-get.
