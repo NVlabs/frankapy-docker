@@ -12,7 +12,7 @@ docker run \
   --privileged \
   -v $FRANKAPY_DOCKER_DIR:/root/frankapy-docker \
   -v $FRANKAPY_DOCKER_DIR/config/terminator_config:/root/.config/terminator/config \
-  franka-interface \
+  franka-interface:rvt \
   bash -ci ' \
     if [ ! -z ${DISPLAY+x} ] && ( [ -z ${CONSOLE+x} ] || [ $CONSOLE == terminator ] ); then \
       ./frankapy-docker/scripts/start_control_pc_terminator.sh; \
