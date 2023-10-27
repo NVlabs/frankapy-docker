@@ -1,5 +1,7 @@
 [global_config]
 [keybindings]
+[profiles]
+  [[default]]
 [layouts]
   [[default]]
     [[[child1]]]
@@ -45,15 +47,13 @@
       parent = child1
       type = Terminal
     [[[terminal4]]]
-      command = sleep 2; $HOME/frankapy-docker/scripts/start_franka_ros_interface.sh; bash
+      command = sleep 2 && $HOME/frankapy-docker/scripts/start_franka_ros_interface.sh; bash
       order = 0
       parent = child3
       type = Terminal
     [[[terminal5]]]
-      command = sleep 2; $HOME/frankapy-docker/scripts/start_franka_gripper.sh; bash
+      command = sleep 2 && $HOME/frankapy-docker/scripts/start_franka_gripper.sh; bash
       order = 1
       parent = child3
       type = Terminal
 [plugins]
-[profiles]
-  [[default]]
