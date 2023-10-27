@@ -1,6 +1,6 @@
 #!/bin/bash
 
-tmux new-session -d
+tmux new-session -d -x $(tput cols) -y $(tput lines)
 tmux split-window -h
 tmux split-window -v -t 1
 tmux send-keys -t 0 "$HOME/frankapy-docker/scripts/start_franka_interface.sh" Enter

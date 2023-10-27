@@ -80,11 +80,6 @@ RUN cd catkin_ws && \
         catkin_make" && \
     echo "source $HOME/catkin_ws/devel/setup.bash" >> $HOME/.bashrc
 
-# Install rsync.
-RUN apt-get update && \
-    apt-get install -y rsync && \
-    rm -rf /var/lib/apt/lists/*
-
 # Install terminator and tmux.
 RUN apt-get update && \
     apt-get install -y \

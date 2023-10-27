@@ -79,57 +79,57 @@ Run the installation steps below correspondingly for the [Control PC](#control-p
     ./scripts/run_frankapy.sh
     ```
 
-    If you built the image with Azure Kinect, run the following command instead:
+    or if you built the image with Azure Kinect, run:
 
     ```Shell
     ./scripts/run_frankapy_k4a.sh
     ```
 
-    While we are in the container, by default we will just have access to the `frankapy` repo copied during docker build. In practice, we may want to run with an updated `frankapy` repo as we develop on the fly. One way to achieve that is to mount a `frankapy` repo from your host into the container, and overwrite the default `frankapy` repo created during docker build. This has been set up and can be simply done by setting an environment variable `FRANKAPY_DIR`:
+    Both commands will start a new `terminator` window (or `tmux` session) and launch `roscore`.
+
+    - We use `terminator` and `tmux` for launching processes in multiple terminals at once. The script will decide which one to use based on the availability of display. You can also manually set the choice by setting an environment variable `CONSOLE`, for example:
+
+        ```Shell
+        CONSOLE=tmux ./scripts/run_frankapy.sh
+        ```
+
+        or
+
+        ```Shell
+        CONSOLE=terminator ./scripts/run_frankapy.sh
+        ```
+
+    - While we are in the container, by default we will just have access to the `frankapy` repo copied during docker build. In practice, we may want to run with an updated `frankapy` repo as we develop on the fly. One way to achieve that is to mount a `frankapy` repo from your host into the container, and overwrite the default `frankapy` repo created during docker build. This has been set up and can be simply done by setting an environment variable `FRANKAPY_DIR`:
+
+        ```Shell
+        FRANKAPY_DIR=/path/to/frankapy/on/host ./scripts/run_frankapy.sh
+        ```
+
+        This way you can run with a dynamic `frankapy` repo and do not need to re-build the docker image after making changes.
+
+5. On the **Control PC**, run a docker container for `franka-interface` in interactive mode:
 
     ```Shell
-    FRANKAPY_DIR=/path/to/frankapy/on/host ./scripts/run_frankapy.sh
-    ```
-
-    This way you can run with a dynamic `frankapy` repo and do not need to re-build the docker image after making changes.
-
-5. On the **FrankaPy PC**, once you are in the container, start a new `tmux` session running `roscore`:
-
-    ```Shell
-    ./frankapy-docker/scripts/start_frankapy_pc_tmux.sh
-    ```
-
-    Alternatively, if you are connecting with VNC and therefore has a display, you can also launch with `terminator` rather than `tmux`:
-
-    ```Shell
-    ./frankapy-docker/scripts/start_frankapy_pc_terminator.sh
-    ```
-
-    By now `roscore` should be running on the FrankaPy PC.
-
-6. On the **Control PC**, run a docker container for `franka-interface` in interactive mode:
-
-    ```Shell
-    ./scripts/run_franka-interface.sh
-    ```
-
-7. On the **Control PC**, once you are in the container, start a new `tmux` session running `franka-interface`:
-
-    ```Shell
-    ROS_MASTER_URI=$YOUR_ROS_MASTER_URI ./frankapy-docker/scripts/start_control_pc_tmux.sh
+    ROS_MASTER_URI=$YOUR_ROS_MASTER_URI ./scripts/run_franka-interface.sh
     ```
 
     Note that `$ROS_MASTER_URI` needs to be set above according to the IP or hostname of the FrankaPy PC.
 
-    Alternatively, if you are connecting with VNC and therefore has a display, you can also launch with `terminator` rather than `tmux`:
+    This will launch `franka_interface`, `franka_ros_interface`, and `franka_gripper` in three separate terminals on the Control PC.
 
-    ```Shell
-    ROS_MASTER_URI=$YOUR_ROS_MASTER_URI ./frankapy-docker/scripts/start_control_pc_terminator.sh
-    ```
+    - Likewise, the script will choose between `terminator` and `tmux` based on the availability of display. You can also manually set the choice by setting an environment variable `CONSOLE`, for example:
 
-    This should have launched `franka_interface`, `franka_ros_interface`, and `franka_gripper` in three separate windows on the Control PC.
+        ```Shell
+        CONSOLE=tmux ROS_MASTER_URI=$YOUR_ROS_MASTER_URI ./scripts/run_franka-interface.sh
+        ```
 
-8. Finally, go back to the **FrankaPy PC**. In the latest opened window in `tmux` or `terminator`, you should be able to run an example from `frankapy` now, e.g.,:
+        or
+
+        ```Shell
+        CONSOLE=terminator ROS_MASTER_URI=$YOUR_ROS_MASTER_URI ./scripts/run_franka-interface.sh
+        ```
+
+6. Finally, go back to the **FrankaPy PC**. In the latest opened window in `tmux` or `terminator`, you should be able to run an example from `frankapy` now, e.g.,:
 
     ```Shell
     python3 frankapy/examples/example_movements.py
