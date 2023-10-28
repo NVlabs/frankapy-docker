@@ -191,7 +191,7 @@ See the official docs [here](https://docs.docker.com/engine/install/ubuntu/) and
 
     After rebooting, you should be able to run `nvidia-smi` and see the version of your NVIDIA driver:
 
-    ```Shell
+    ```
     +-----------------------------------------------------------------------------+
     | NVIDIA-SMI 515.43.04    Driver Version: 515.43.04    CUDA Version: 11.7     |
     |-------------------------------+----------------------+----------------------+
